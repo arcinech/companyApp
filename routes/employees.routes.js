@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const ObjectId = require('mongodb').ObjectId;
 const Employee = require('../models/employee.model');
 
-router.get('/employees', (req, res) => {
-  req.db.collection('employees').find().toArray((err, data) => { 
-    if (err) res.status(500).json({ message: err });
-    else res.json(data);
-  });
+  router.get('/employees', async (req, res) => { 
+    try {
+      res.json(await Employee.find());
+    }
+    catch (err) { res.status(500).json({ message: err }); }
 });
 
 router.get('/employees/random', async (req, res) => {
