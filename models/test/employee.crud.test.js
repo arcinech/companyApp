@@ -26,6 +26,7 @@ describe('Employee', () => {
   
     after(async () => {
       await Employee.deleteMany();
+      await Department.deleteMany();
     });
 
     it('should return all the data with "find" method', async () => {
