@@ -1,7 +1,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require ('../../../../server');
-const Department = require('../../../department.model');
+const server = require('../../../server');
+const Department = require('../../../models/department.model');
 
 chai.use(chaiHttp);
 
@@ -23,7 +23,7 @@ describe('DELETE /api/departments', () => {
     const res = await request(server).delete('/api/departments/5d9f1140f10a81216cfd4408');
     const deletedDep = await request(server).get('/api/departments/5d9f1140f10a81216cfd4408');
     expect(res.status).to.be.equal(200);
-    expect(res.body).to.not.be.null; //server returns document upon deletion
+    expect(res.body).to.not.be.null; //server returns removed document upon deletion
     expect(deletedDep.body.message).to.be.equal('Not found');
   });
 
